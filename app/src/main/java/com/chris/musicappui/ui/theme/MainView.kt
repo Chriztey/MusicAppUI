@@ -55,6 +55,10 @@ fun MainView() {
     val navBackStackEntry by controller.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
 
+    val dialogOpen = remember {
+        mutableStateOf(false)
+    }
+
     val currentScreen = remember {
         viewModel.currentScreen.value
     }
@@ -91,6 +95,7 @@ fun MainView() {
                             scaffoldState.drawerState.close()
                         }
                         if(item.dRoute == "add_account") {
+                            dialogOpen.value = true
                             // OPEN DIALOG
                         } else {
                             controller.navigate(item.dRoute)
@@ -103,6 +108,8 @@ fun MainView() {
         
     ) {
       Navigation(navController = controller, viewModel = viewModel, pd = it )
+      AccountDialog(dialogOpen = dialogOpen)
+
     }
 
 }
