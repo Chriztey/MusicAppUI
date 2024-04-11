@@ -4,6 +4,32 @@ import androidx.annotation.DrawableRes
 
 sealed class Screen(val title: String, val route: String) {
 
+    sealed class BottomScreen(
+        val bTitle: String,
+        val bRoute: String,
+        @DrawableRes val icon: Int
+
+    ) : Screen(bTitle, bRoute) {
+        object Home : BottomScreen(
+            "Home",
+            "home",
+            R.drawable.ic_music_player
+        )
+
+        object Library : BottomScreen(
+            "Library",
+            "library",
+            R.drawable.ic_library
+        )
+
+        object Browse : BottomScreen(
+            "Browse",
+            "browse",
+            R.drawable.ic_browse
+        )
+
+    }
+
     sealed class DrawerScreen(
         val dTitle: String,
         val dRoute: String,
@@ -31,6 +57,12 @@ sealed class Screen(val title: String, val route: String) {
 
         }
 }
+
+val screensInBottom = listOf(
+    Screen.BottomScreen.Home,
+    Screen.BottomScreen.Library,
+    Screen.BottomScreen.Browse
+)
 
 val screensInDrawer = listOf(
     Screen.DrawerScreen.Account,
