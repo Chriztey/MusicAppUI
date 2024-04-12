@@ -23,12 +23,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.chris.musicappui.R
-
+val categories = listOf("Hits","Happy","Workout","Running","Yoga","TGIF")
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 
 fun Home() {
-    val categories = listOf("Hits","Happy","Workout","Yoga","TGIF")
+
     val grouped = listOf<String>("New Release","Favorites","Top Rated").groupBy { it[0] }
 
     LazyColumn{
