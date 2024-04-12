@@ -1,5 +1,6 @@
 package com.chris.musicappui.ui.theme
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.PaddingValues
@@ -16,9 +17,10 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
+import androidx.compose.material.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.ModalBottomSheetLayout
 import androidx.compose.material.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -76,21 +78,28 @@ fun MainView() {
             BottomNavigation(Modifier.wrapContentSize()) {
                 screensInBottom.forEach(){
                     item ->
+                    val isSelected = currentRoute == item.bRoute
+                    Log.d("Navigation", "Item: ${item.bTitle}, Current Route: $currentRoute, Is Selected: $isSelected")
+                    val tint = if(isSelected) Color.White else Color.Black
                     BottomNavigationItem(
                         selected = currentRoute == item.bRoute,
                         onClick = { controller.navigate(item.bRoute)},
-                        icon = {
-                            Icon(
+                        icon = { Icon(
                                 painterResource(id = item.icon),
-                                contentDescription = item.bTitle)
+                                contentDescription = item.bTitle,
+                                tint = tint)
                         },
-                        label = { Text(text = item.bTitle)},
+                        label = { Text(text = item.bTitle, color = tint)},
                         selectedContentColor = Color.White,
                         unselectedContentColor = Color.Black
                         )
                 }
             }
         }
+    }
+    
+    ModalBottomSheetLayout(sheetContent = ) {
+        
     }
 
 
@@ -183,7 +192,7 @@ fun Navigation(navController: NavController, viewModel: MainViewModel, pd: Paddi
         }
 
         composable(Screen.BottomScreen.Library.route) {
-
+            Library()
         }
 
         composable(Screen.BottomScreen.Browse.route) {
